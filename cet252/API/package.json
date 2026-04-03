@@ -1,0 +1,24 @@
+{
+  "name": "music-library-api",
+  "version": "1.0.0",
+  "description": "Portfolio Task B2 REST API",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest --runInBand",
+    "apidoc": "apidoc -i src/routes -o ../../APIDOC"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "apidoc": "^1.2.0",
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4"
+  }
+}

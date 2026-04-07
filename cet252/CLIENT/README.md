@@ -11,6 +11,8 @@ Client runs on `http://localhost:3000`.
 
 By default it calls API at `http://localhost:3001`.
 
+Main page file: `src/views/index.html`.
+
 You can change API URL with:
 
 ```bash

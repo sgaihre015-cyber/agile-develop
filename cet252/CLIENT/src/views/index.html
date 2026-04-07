@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Library Client</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 24px; background: #f7f7f7; }
+      .card { background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+      table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+      th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+      th { background: #f1f1f1; }
+      .error { color: #b00020; font-weight: bold; }
+      .meta { color: #555; font-size: 0.95rem; }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>Music Library</h1>
+      <p class="meta" id="source">Data source: loading...</p>
+      <p class="error" id="error" hidden></p>
+      <table id="songsTable" hidden>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Genre</th>
+            <th>Year</th>
+          </tr>
+        </thead>
+        <tbody id="songsBody"></tbody>
+      </table>
+    </div>
+    <script>
+      (async () => {
+        const sourceEl = document.getElementById('source');
+        const errorEl = document.getElementById('error');
+        const tableEl = document.getElementById('songsTable');
+        const bodyEl = document.getElementById('songsBody');
+
+        try {
+          const configRes = await fetch('/config');
+          if (!configRes.ok) {
+            throw new Error('Unable to load config');
+          }
+
+          const config = await configRes.json();
+          const apiBaseUrl = config.apiBaseUrl || 'http://localhost:3001';
+          sourceEl.textContent = `Data source: ${apiBaseUrl}/api/songs`;
+
+          const response = await fetch(`${apiBaseUrl}/api/songs`);
+          if (!response.ok) {
+            throw new Error('Failed API response');
+          }
+
+          const songs = await response.json();
+          songs.forEach((song) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+              <td>${song.id ?? ''}</td>
+              <td>${song.title ?? ''}</td>
+              <td>${song.artist ?? ''}</td>
+              <td>${song.genre ?? ''}</td>
+              <td>${song.year ?? ''}</td>
+            `;
+            bodyEl.appendChild(row);
+          });
+          tableEl.hidden = false;
+        } catch {
+          sourceEl.textContent = 'Data source: unavailable';
+          errorEl.textContent = 'Unable to load songs from API. Please check the API server.';
+          errorEl.hidden = false;
+        }
+      })();
+    </script>
+  </body>
+</html>

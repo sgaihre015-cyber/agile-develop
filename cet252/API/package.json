@@ -8,7 +8,7 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "jest --runInBand",
-    "apidoc": "apidoc -i src/routes -o ../../APIDOC"
+    "apidoc": "apidoc -i src/routes -o ../APIDOC"
   },
   "dependencies": {
     "cors": "^2.8.5",

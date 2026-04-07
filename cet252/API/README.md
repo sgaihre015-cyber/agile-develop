@@ -29,3 +29,9 @@ npm test
 ```bash
 npm run apidoc
 ```
+
+## Seed database
+
+```bash
+npm run seed
+```

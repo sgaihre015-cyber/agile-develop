@@ -1,0 +1,22 @@
+module.exports = [
+  { title: 'Shape of You', artist: 'Ed Sheeran', genre: 'Pop', year: 2017 },
+  { title: 'Blinding Lights', artist: 'The Weeknd', genre: 'Synth-pop', year: 2019 },
+  { title: 'Bohemian Rhapsody', artist: 'Queen', genre: 'Rock', year: 1975 },
+  { title: 'Smells Like Teen Spirit', artist: 'Nirvana', genre: 'Grunge', year: 1991 },
+  { title: 'Billie Jean', artist: 'Michael Jackson', genre: 'Pop', year: 1982 },
+  { title: 'Someone Like You', artist: 'Adele', genre: 'Soul', year: 2011 },
+  { title: 'Uptown Funk', artist: 'Mark Ronson ft. Bruno Mars', genre: 'Funk', year: 2014 },
+  { title: 'Hotel California', artist: 'Eagles', genre: 'Rock', year: 1976 },
+  { title: 'Believer', artist: 'Imagine Dragons', genre: 'Alternative', year: 2017 },
+  { title: 'Rolling in the Deep', artist: 'Adele', genre: 'Pop', year: 2010 },
+  { title: 'Lose Yourself', artist: 'Eminem', genre: 'Hip-Hop', year: 2002 },
+  { title: 'Take Five', artist: 'The Dave Brubeck Quartet', genre: 'Jazz', year: 1959 },
+  { title: 'Halo', artist: 'Beyoncé', genre: 'R&B', year: 2008 },
+  { title: 'Fix You', artist: 'Coldplay', genre: 'Alternative', year: 2005 },
+  { title: 'Wonderwall', artist: 'Oasis', genre: 'Britpop', year: 1995 },
+  { title: 'Humble', artist: 'Kendrick Lamar', genre: 'Hip-Hop', year: 2017 },
+  { title: 'Levitating', artist: 'Dua Lipa', genre: 'Disco-pop', year: 2020 },
+  { title: 'Thinking Out Loud', artist: 'Ed Sheeran', genre: 'Pop', year: 2014 },
+  { title: 'Hey Jude', artist: 'The Beatles', genre: 'Rock', year: 1968 },
+  { title: 'Bad Guy', artist: 'Billie Eilish', genre: 'Electropop', year: 2019 }
+];

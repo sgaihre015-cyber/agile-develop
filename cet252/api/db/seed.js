@@ -2,16 +2,16 @@ const { initDb } = require('./database');
 
 const db = initDb();
 
-db.exec('DELETE FROM music_items;');
+db.exec('DELETE FROM books;');
 
 const insert = db.prepare(
-  'INSERT INTO music_items (title, artist, year, genre) VALUES (?, ?, ?, ?)'
+  'INSERT INTO books (title, author, year, publisher) VALUES (?, ?, ?, ?)'
 );
 
 [
-  ['Random Access Memories', 'Daft Punk', 2013, 'Electronic'],
-  ['Thriller', 'Michael Jackson', 1982, 'Pop'],
-  ['Back in Black', 'AC/DC', 1980, 'Rock']
+  ['Clean Code', 'Robert C. Martin', 2008, 'Prentice Hall'],
+  ['The Pragmatic Programmer', 'Andrew Hunt', 1999, 'Addison-Wesley'],
+  ['Refactoring', 'Martin Fowler', 1999, 'Addison-Wesley']
 ].forEach((row) => insert.run(...row));
 
-console.log('Seeded music library data.');
+console.log('Seeded books data.');

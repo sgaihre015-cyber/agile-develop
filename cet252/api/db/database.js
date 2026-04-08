@@ -14,12 +14,12 @@ function getDb() {
 function initDb() {
   const conn = getDb();
   conn.exec(`
-    CREATE TABLE IF NOT EXISTS music_items (
+    CREATE TABLE IF NOT EXISTS books (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT NOT NULL,
-      artist TEXT NOT NULL,
+      author TEXT NOT NULL,
       year INTEGER NOT NULL,
-      genre TEXT DEFAULT ''
+      publisher TEXT DEFAULT ''
     );
   `);
   return conn;

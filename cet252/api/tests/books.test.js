@@ -7,7 +7,7 @@ const { initDb } = require('../db/database');
 const db = initDb();
 
 beforeEach(() => {
-  db.exec('DELETE FROM music_items;');
+  db.exec('DELETE FROM books;');
 });
 
 describe('Books API', () => {
@@ -19,10 +19,10 @@ describe('Books API', () => {
 
   test('POST /api/books creates a record', async () => {
     const payload = {
-      title: 'The Dark Side of the Moon',
-      artist: 'Pink Floyd',
-      year: 1973,
-      genre: 'Progressive Rock'
+      title: 'Clean Architecture',
+      author: 'Robert C. Martin',
+      year: 2017,
+      publisher: 'Pearson'
     };
     const res = await request(app).post('/api/books').send(payload);
 
@@ -39,32 +39,32 @@ describe('Books API', () => {
 
   test('PUT /api/books/:id updates a record', async () => {
     const created = await request(app).post('/api/books').send({
-      title: 'Nevermind',
-      artist: 'Nirvana',
-      year: 1991,
-      genre: 'Grunge'
+      title: 'Domain-Driven Design',
+      author: 'Eric Evans',
+      year: 2003,
+      publisher: 'Addison-Wesley'
     });
 
     const updated = await request(app)
       .put(`/api/books/${created.body.data.id}`)
       .send({
-        title: 'Nevermind (Remastered)',
-        artist: 'Nirvana',
-        year: 2011,
-        genre: 'Rock'
+        title: 'Domain-Driven Design (2nd Edition)',
+        author: 'Eric Evans',
+        year: 2026,
+        publisher: 'Addison-Wesley'
       });
 
     expect(updated.statusCode).toBe(200);
-    expect(updated.body.data.title).toBe('Nevermind (Remastered)');
-    expect(updated.body.data.year).toBe(2011);
+    expect(updated.body.data.title).toBe('Domain-Driven Design (2nd Edition)');
+    expect(updated.body.data.year).toBe(2026);
   });
 
   test('DELETE /api/books/:id deletes a record', async () => {
     const created = await request(app).post('/api/books').send({
-      title: 'Hybrid Theory',
-      artist: 'Linkin Park',
-      year: 2000,
-      genre: 'Nu Metal'
+      title: 'Design Patterns',
+      author: 'Erich Gamma',
+      year: 1994,
+      publisher: 'Addison-Wesley'
     });
 
     const deleted = await request(app).delete(`/api/books/${created.body.data.id}`);

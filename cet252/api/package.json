@@ -1,5 +1,5 @@
 {
-  "name": "music-library-api",
+  "name": "books-api",
   "version": "1.0.0",
   "description": "Express + SQLite API with apiDoc and Jest tests",
   "main": "server.js",

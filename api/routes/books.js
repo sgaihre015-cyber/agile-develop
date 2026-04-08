@@ -37,6 +37,7 @@ router.get('/', (_req, res) => {
  * @api {get} /api/books/:id Get music library item
  * @apiName GetBook
  * @apiGroup Books
+ * @apiParam {Number} id Book id.
  */
 router.get('/:id', (req, res) => {
   const id = parseId(req.params.id);
@@ -79,6 +80,7 @@ router.post('/', (req, res) => {
  * @api {put} /api/books/:id Update music library item
  * @apiName UpdateBook
  * @apiGroup Books
+ * @apiParam {Number} id Book id.
  */
 router.put('/:id', (req, res) => {
   const id = parseId(req.params.id);
@@ -109,6 +111,7 @@ router.put('/:id', (req, res) => {
  * @api {delete} /api/books/:id Delete music library item
  * @apiName DeleteBook
  * @apiGroup Books
+ * @apiParam {Number} id Book id.
  */
 router.delete('/:id', (req, res) => {
   const id = parseId(req.params.id);

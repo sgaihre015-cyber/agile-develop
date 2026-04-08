@@ -23,7 +23,7 @@ function validateItem(payload) {
 /**
  * @api {get} /api/books List music library items
  * @apiName GetBooks
- * @apiGroup Books
+ * @apiGroup MusicLibrary
  *
  * @apiSuccess {Object[]} data Items.
  */
@@ -36,7 +36,7 @@ router.get('/', (_req, res) => {
 /**
  * @api {get} /api/books/:id Get music library item
  * @apiName GetMusicItem
- * @apiGroup Books
+ * @apiGroup MusicLibrary
  * @apiParam {Number} id Item id.
  */
 router.get('/:id', (req, res) => {
@@ -55,7 +55,7 @@ router.get('/:id', (req, res) => {
 /**
  * @api {post} /api/books Create music library item
  * @apiName CreateMusicItem
- * @apiGroup Books
+ * @apiGroup MusicLibrary
  */
 router.post('/', (req, res) => {
   const err = validateItem(req.body);
@@ -79,7 +79,7 @@ router.post('/', (req, res) => {
 /**
  * @api {put} /api/books/:id Update music library item
  * @apiName UpdateMusicItem
- * @apiGroup Books
+ * @apiGroup MusicLibrary
  * @apiParam {Number} id Item id.
  */
 router.put('/:id', (req, res) => {
@@ -110,7 +110,7 @@ router.put('/:id', (req, res) => {
 /**
  * @api {delete} /api/books/:id Delete music library item
  * @apiName DeleteMusicItem
- * @apiGroup Books
+ * @apiGroup MusicLibrary
  * @apiParam {Number} id Item id.
  */
 router.delete('/:id', (req, res) => {

@@ -29,7 +29,7 @@ function validateItem(payload) {
  */
 router.get('/', (_req, res) => {
   const db = initDb();
-  const rows = db.prepare('SELECT * FROM books ORDER BY id ASC').all();
+  const rows = db.prepare('SELECT * FROM music_items ORDER BY id ASC').all();
   res.json({ data: rows.map(toPublicItem) });
 });
 
@@ -45,7 +45,7 @@ router.get('/:id', (req, res) => {
     return res.status(400).json({ error: 'Invalid id' });
   }
   const db = initDb();
-  const row = db.prepare('SELECT * FROM books WHERE id = ?').get(id);
+  const row = db.prepare('SELECT * FROM music_items WHERE id = ?').get(id);
   if (!row) {
     return res.status(404).json({ error: 'Item not found' });
   }
@@ -66,11 +66,11 @@ router.post('/', (req, res) => {
   const db = initDb();
   const { title, artist, year, genre = '' } = req.body;
   const result = db
-    .prepare('INSERT INTO books (title, artist, year, genre) VALUES (?, ?, ?, ?)')
+    .prepare('INSERT INTO music_items (title, artist, year, genre) VALUES (?, ?, ?, ?)')
     .run(String(title).trim(), String(artist).trim(), year, String(genre));
 
   const row = db
-    .prepare('SELECT * FROM books WHERE id = ?')
+    .prepare('SELECT * FROM music_items WHERE id = ?')
     .get(Number(result.lastInsertRowid));
 
   return res.status(201).json({ data: toPublicItem(row) });
@@ -96,14 +96,14 @@ router.put('/:id', (req, res) => {
   const db = initDb();
   const { title, artist, year, genre = '' } = req.body;
   const result = db
-    .prepare('UPDATE books SET title = ?, artist = ?, year = ?, genre = ? WHERE id = ?')
+    .prepare('UPDATE music_items SET title = ?, artist = ?, year = ?, genre = ? WHERE id = ?')
     .run(String(title).trim(), String(artist).trim(), year, String(genre), id);
 
   if (result.changes === 0) {
     return res.status(404).json({ error: 'Item not found' });
   }
 
-  const updated = db.prepare('SELECT * FROM books WHERE id = ?').get(id);
+  const updated = db.prepare('SELECT * FROM music_items WHERE id = ?').get(id);
   return res.json({ data: toPublicItem(updated) });
 });
 
@@ -119,7 +119,7 @@ router.delete('/:id', (req, res) => {
     return res.status(400).json({ error: 'Invalid id' });
   }
   const db = initDb();
-  const result = db.prepare('DELETE FROM books WHERE id = ?').run(id);
+  const result = db.prepare('DELETE FROM music_items WHERE id = ?').run(id);
   if (result.changes === 0) {
     return res.status(404).json({ error: 'Item not found' });
   }

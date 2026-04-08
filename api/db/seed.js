@@ -2,10 +2,10 @@ const { initDb } = require('./database');
 
 const db = initDb();
 
-db.exec('DELETE FROM books;');
+db.exec('DELETE FROM music_items;');
 
 const insert = db.prepare(
-  'INSERT INTO books (title, artist, year, genre) VALUES (?, ?, ?, ?)'
+  'INSERT INTO music_items (title, artist, year, genre) VALUES (?, ?, ?, ?)'
 );
 
 [

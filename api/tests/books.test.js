@@ -7,10 +7,10 @@ const { initDb } = require('../db/database');
 const db = initDb();
 
 beforeEach(() => {
-  db.exec('DELETE FROM books;');
+  db.exec('DELETE FROM music_items;');
 });
 
-describe('Books API', () => {
+describe('Music Library API', () => {
   test('GET /api/books returns empty list', async () => {
     const res = await request(app).get('/api/books');
     expect(res.statusCode).toBe(200);

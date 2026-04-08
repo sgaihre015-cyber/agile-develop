@@ -14,7 +14,7 @@ function getDb() {
 function initDb() {
   const conn = getDb();
   conn.exec(`
-    CREATE TABLE IF NOT EXISTS books (
+    CREATE TABLE IF NOT EXISTS music_items (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       title TEXT NOT NULL,
       artist TEXT NOT NULL,

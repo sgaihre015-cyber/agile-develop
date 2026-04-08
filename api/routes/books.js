@@ -22,7 +22,7 @@ function validateItem(payload) {
 
 /**
  * @api {get} /api/books List music library items
- * @apiName GetBooks
+ * @apiName GetMusicItems
  * @apiGroup MusicLibrary
  *
  * @apiSuccess {Object[]} data Items.

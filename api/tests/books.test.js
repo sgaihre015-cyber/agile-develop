@@ -11,34 +11,34 @@ beforeEach(() => {
 });
 
 describe('Music Library API', () => {
-  test('GET /api/books returns empty list', async () => {
-    const res = await request(app).get('/api/books');
+  test('GET /api/music returns empty list', async () => {
+    const res = await request(app).get('/api/music');
     expect(res.statusCode).toBe(200);
     expect(res.body).toEqual({ data: [] });
   });
 
-  test('POST /api/books creates a record', async () => {
+  test('POST /api/music creates a record', async () => {
     const payload = {
       title: 'The Dark Side of the Moon',
       artist: 'Pink Floyd',
       year: 1973,
       genre: 'Progressive Rock'
     };
-    const res = await request(app).post('/api/books').send(payload);
+    const res = await request(app).post('/api/music').send(payload);
 
     expect(res.statusCode).toBe(201);
     expect(res.body.data).toMatchObject(payload);
     expect(res.body.data.id).toBeDefined();
   });
 
-  test('POST /api/books validates required fields', async () => {
-    const res = await request(app).post('/api/books').send({ title: '' });
+  test('POST /api/music validates required fields', async () => {
+    const res = await request(app).post('/api/music').send({ title: '' });
     expect(res.statusCode).toBe(400);
     expect(res.body.error).toBeDefined();
   });
 
-  test('PUT /api/books/:id updates a record', async () => {
-    const created = await request(app).post('/api/books').send({
+  test('PUT /api/music/:id updates a record', async () => {
+    const created = await request(app).post('/api/music').send({
       title: 'Nevermind',
       artist: 'Nirvana',
       year: 1991,
@@ -46,7 +46,7 @@ describe('Music Library API', () => {
     });
 
     const updated = await request(app)
-      .put(`/api/books/${created.body.data.id}`)
+      .put(`/api/music/${created.body.data.id}`)
       .send({
         title: 'Nevermind (Remastered)',
         artist: 'Nirvana',
@@ -59,18 +59,18 @@ describe('Music Library API', () => {
     expect(updated.body.data.year).toBe(2011);
   });
 
-  test('DELETE /api/books/:id deletes a record', async () => {
-    const created = await request(app).post('/api/books').send({
+  test('DELETE /api/music/:id deletes a record', async () => {
+    const created = await request(app).post('/api/music').send({
       title: 'Hybrid Theory',
       artist: 'Linkin Park',
       year: 2000,
       genre: 'Nu Metal'
     });
 
-    const deleted = await request(app).delete(`/api/books/${created.body.data.id}`);
+    const deleted = await request(app).delete(`/api/music/${created.body.data.id}`);
     expect(deleted.statusCode).toBe(204);
 
-    const check = await request(app).get(`/api/books/${created.body.data.id}`);
+    const check = await request(app).get(`/api/music/${created.body.data.id}`);
     expect(check.statusCode).toBe(404);
   });
 });

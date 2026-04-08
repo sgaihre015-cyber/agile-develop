@@ -24,6 +24,7 @@ function validateItem(payload) {
  * @api {get} /api/books List music library items
  * @apiName GetMusicItems
  * @apiGroup MusicLibrary
+ * @apiDescription Alias path: /api/music
  *
  * @apiSuccess {Object[]} data Items.
  */
@@ -38,6 +39,7 @@ router.get('/', (_req, res) => {
  * @apiName GetMusicItem
  * @apiGroup MusicLibrary
  * @apiParam {Number} id Item id.
+ * @apiDescription Alias path: /api/music/:id
  */
 router.get('/:id', (req, res) => {
   const id = parseId(req.params.id);
@@ -56,6 +58,7 @@ router.get('/:id', (req, res) => {
  * @api {post} /api/books Create music library item
  * @apiName CreateMusicItem
  * @apiGroup MusicLibrary
+ * @apiDescription Alias path: /api/music
  */
 router.post('/', (req, res) => {
   const err = validateItem(req.body);
@@ -81,6 +84,7 @@ router.post('/', (req, res) => {
  * @apiName UpdateMusicItem
  * @apiGroup MusicLibrary
  * @apiParam {Number} id Item id.
+ * @apiDescription Alias path: /api/music/:id
  */
 router.put('/:id', (req, res) => {
   const id = parseId(req.params.id);
@@ -112,6 +116,7 @@ router.put('/:id', (req, res) => {
  * @apiName DeleteMusicItem
  * @apiGroup MusicLibrary
  * @apiParam {Number} id Item id.
+ * @apiDescription Alias path: /api/music/:id
  */
 router.delete('/:id', (req, res) => {
   const id = parseId(req.params.id);

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Library Client</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Music Library Client</h1>
+
+      <form id="music-form" class="card">
+        <h2>Add Music</h2>
+        <div class="grid">
+          <label>
+            Title
+            <input id="title" name="title" required />
+          </label>
+          <label>
+            Artist
+            <input id="artist" name="artist" required />
+          </label>
+          <label>
+            Year
+            <input id="year" name="year" type="number" required />
+          </label>
+          <label>
+            Genre
+            <input id="genre" name="genre" />
+          </label>
+        </div>
+        <button type="submit">Add</button>
+      </form>
+
+      <section class="card">
+        <h2>Items</h2>
+        <p id="message" class="message"></p>
+        <button id="refresh" type="button">Refresh</button>
+        <ul id="music-list"></ul>
+      </section>
+    </main>
+    <script src="/app.js"></script>
+  </body>
+</html>

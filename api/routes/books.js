@@ -4,7 +4,7 @@ const { initDb } = require('../db/database');
 const router = express.Router();
 
 const parseId = (value) => Number.parseInt(value, 10);
-const toPublicRow = (row) => ({
+const toPublicItem = (row) => ({
   id: row.id,
   title: row.title,
   artist: row.artist,
@@ -12,7 +12,7 @@ const toPublicRow = (row) => ({
   genre: row.genre
 });
 
-function validateBook(payload) {
+function validateItem(payload) {
   if (!payload || typeof payload !== 'object') return 'Invalid payload';
   if (!payload.title || !String(payload.title).trim()) return 'title is required';
   if (!payload.artist || !String(payload.artist).trim()) return 'artist is required';
@@ -30,14 +30,14 @@ function validateBook(payload) {
 router.get('/', (_req, res) => {
   const db = initDb();
   const rows = db.prepare('SELECT * FROM books ORDER BY id ASC').all();
-  res.json({ data: rows.map(toPublicRow) });
+  res.json({ data: rows.map(toPublicItem) });
 });
 
 /**
  * @api {get} /api/books/:id Get music library item
- * @apiName GetBook
+ * @apiName GetMusicItem
  * @apiGroup Books
- * @apiParam {Number} id Book id.
+ * @apiParam {Number} id Item id.
  */
 router.get('/:id', (req, res) => {
   const id = parseId(req.params.id);
@@ -47,18 +47,18 @@ router.get('/:id', (req, res) => {
   const db = initDb();
   const row = db.prepare('SELECT * FROM books WHERE id = ?').get(id);
   if (!row) {
-    return res.status(404).json({ error: 'Book not found' });
+    return res.status(404).json({ error: 'Item not found' });
   }
-  return res.json({ data: toPublicRow(row) });
+  return res.json({ data: toPublicItem(row) });
 });
 
 /**
  * @api {post} /api/books Create music library item
- * @apiName CreateBook
+ * @apiName CreateMusicItem
  * @apiGroup Books
  */
 router.post('/', (req, res) => {
-  const err = validateBook(req.body);
+  const err = validateItem(req.body);
   if (err) {
     return res.status(400).json({ error: err });
   }
@@ -73,14 +73,14 @@ router.post('/', (req, res) => {
     .prepare('SELECT * FROM books WHERE id = ?')
     .get(Number(result.lastInsertRowid));
 
-  return res.status(201).json({ data: toPublicRow(row) });
+  return res.status(201).json({ data: toPublicItem(row) });
 });
 
 /**
  * @api {put} /api/books/:id Update music library item
- * @apiName UpdateBook
+ * @apiName UpdateMusicItem
  * @apiGroup Books
- * @apiParam {Number} id Book id.
+ * @apiParam {Number} id Item id.
  */
 router.put('/:id', (req, res) => {
   const id = parseId(req.params.id);
@@ -88,7 +88,7 @@ router.put('/:id', (req, res) => {
     return res.status(400).json({ error: 'Invalid id' });
   }
 
-  const err = validateBook(req.body);
+  const err = validateItem(req.body);
   if (err) {
     return res.status(400).json({ error: err });
   }
@@ -100,18 +100,18 @@ router.put('/:id', (req, res) => {
     .run(String(title).trim(), String(artist).trim(), year, String(genre), id);
 
   if (result.changes === 0) {
-    return res.status(404).json({ error: 'Book not found' });
+    return res.status(404).json({ error: 'Item not found' });
   }
 
   const updated = db.prepare('SELECT * FROM books WHERE id = ?').get(id);
-  return res.json({ data: toPublicRow(updated) });
+  return res.json({ data: toPublicItem(updated) });
 });
 
 /**
  * @api {delete} /api/books/:id Delete music library item
- * @apiName DeleteBook
+ * @apiName DeleteMusicItem
  * @apiGroup Books
- * @apiParam {Number} id Book id.
+ * @apiParam {Number} id Item id.
  */
 router.delete('/:id', (req, res) => {
   const id = parseId(req.params.id);
@@ -121,7 +121,7 @@ router.delete('/:id', (req, res) => {
   const db = initDb();
   const result = db.prepare('DELETE FROM books WHERE id = ?').run(id);
   if (result.changes === 0) {
-    return res.status(404).json({ error: 'Book not found' });
+    return res.status(404).json({ error: 'Item not found' });
   }
   return res.status(204).send();
 });

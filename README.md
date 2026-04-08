@@ -3,13 +3,13 @@
 ## API + Client
 
 Project now includes:
-- **Server/API** in `/home/runner/work/agile-develop/agile-develop/api`
+- **Server/API** in `./api`
 - **Client (HTML/CSS/JS)** served by the same server at `/`
 
 ### Run
 
 ```bash
-cd /home/runner/work/agile-develop/agile-develop/api
+cd api
 npm install
 npm run seed
 npm run build:docs

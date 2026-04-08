@@ -1,7 +1,7 @@
 const path = require('node:path');
 const express = require('express');
 const cors = require('cors');
-const booksRouter = require('./routes/books');
+const musicRouter = require('./routes/music');
 const { initDb } = require('./db/database');
 
 initDb();
@@ -15,8 +15,7 @@ app.get('/health', (_req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.use('/api/books', booksRouter);
-app.use('/api/music', booksRouter);
+app.use('/api/music', musicRouter);
 app.use('/docs', express.static(path.join(__dirname, 'docs')));
 
 app.use((_req, res) => {

@@ -10,7 +10,7 @@ beforeEach(() => {
   db.exec('DELETE FROM music_items;');
 });
 
-describe('Music Library API', () => {
+describe('Music router for Music Library API', () => {
   test('GET /api/music returns empty list', async () => {
     const res = await request(app).get('/api/music');
     expect(res.statusCode).toBe(200);

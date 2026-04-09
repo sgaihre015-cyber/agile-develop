@@ -1,0 +1,24 @@
+{
+  "name": "music-library-api",
+  "version": "1.0.0",
+  "description": "Express + SQLite API with apiDoc and Jest tests",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node db/seed.js",
+    "test": "jest --runInBand",
+    "build:docs": "apidoc -i routes -o docs"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "apidoc": "^1.2.0",
+    "jest": "^30.0.5",
+    "supertest": "^7.1.1"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
